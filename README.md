@@ -2,7 +2,7 @@
 
 WORK-IN-PROGRESS!!!
 
-This is an Android application for displaying a stream of recent, popular Instagram photos using the [Instagram API](http://www.rottentomatoes.com/).
+This is an Android application for displaying a stream of recent, popular Instagram photos using the [Instagram API](http://instagram.com/developer/).
 
 Time spent: XXX hours spent in total
 
