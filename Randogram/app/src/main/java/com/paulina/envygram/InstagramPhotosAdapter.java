@@ -1,4 +1,4 @@
-package com.paulina.randogram;
+package com.paulina.envygram;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
@@ -42,15 +44,36 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         // 3. Look up views for populating the data (image, caption)
         TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
+        TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
+        ImageView ivProfilePic = (ImageView) convertView.findViewById(R.id.ivProfilePic);
 
         // 4. Insert the Model data into each of the View items
         tvCaption.setText(photo.caption);
+
         // clear out the image view (because you could be using a recycled item)
         ivPhoto.setImageResource(0);
+        ivProfilePic.setImageResource(0);
+
+        // rounded border transformation
+        Transformation roundedBorder = new RoundedTransformationBuilder()
+                .cornerRadiusDp(30)
+                .oval(false)
+                .build();
+
         // insert image view using Picasso
         Picasso.with(getContext())
                .load(photo.imageUrl)
+               .placeholder(R.drawable.placeholderimage)
+               .fit()
                .into(ivPhoto);
+
+        Picasso.with(getContext())
+               .load(photo.profilePicUrl)
+               .resize(100, 100)
+               .transform(roundedBorder)
+               .into(ivProfilePic);
+
+        tvUsername.setText(photo.username);
 
 //        Picasso.with(getContext())
 //                .load(photo.imageUrl)

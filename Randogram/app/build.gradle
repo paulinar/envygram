@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.paulina.randogram"
+        applicationId "com.paulina.envygram"
         minSdkVersion 16
         targetSdkVersion 21
         versionCode 1
@@ -28,4 +28,7 @@ dependencies {
 
     // Load remote images from the network into image views
     compile 'com.squareup.picasso:picasso:2.4.0'
+
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.makeramen:roundedimageview:1.5.0'
 }

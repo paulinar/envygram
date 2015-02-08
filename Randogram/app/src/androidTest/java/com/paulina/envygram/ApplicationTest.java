@@ -1,4 +1,4 @@
-package com.paulina.randogram;
+package com.paulina.envygram;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
