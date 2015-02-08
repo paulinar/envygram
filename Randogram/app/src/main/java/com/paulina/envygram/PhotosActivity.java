@@ -1,13 +1,16 @@
 package com.paulina.envygram;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.ActionBar;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -31,6 +34,13 @@ public class PhotosActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photos);
+
+        // custom action bar
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.custom_actionbar_layout);
+        TextView tvActionBarTitle = (TextView)findViewById(R.id.tvActionBarTitle);
+        Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/billabong.ttf");
+        tvActionBarTitle.setTypeface(customFont);
 
         /* for pull-to-refresh feature */
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
@@ -139,7 +149,7 @@ public class PhotosActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_photos, menu);
+//        getMenuInflater().inflate(R.menu.menu_photos, menu);
         return true;
     }
 
