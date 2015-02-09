@@ -5,7 +5,6 @@
 
     <TextView
         android:id="@+id/tvUsername"
-        android:text="hello"
         android:textColor="@color/darkblue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,7 +12,8 @@
         android:paddingTop="9dp"
         android:maxLines="3"
         android:ellipsize="end"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        android:textStyle="bold"/>
 
     <ImageView
         android:id="@+id/ivProfilePic"
@@ -29,7 +29,6 @@
 
     <ImageView
         android:id="@+id/ivPhoto"
-        android:background="@drawable/ic_launcher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -39,14 +38,84 @@
         android:minHeight="50dp" />
 
     <TextView
-        android:id="@+id/tvCaption"
-        android:text="SUP"
+        android:id="@+id/tvHeart"
+        android:textColor="@color/darkblue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/tvCaption"
         android:layout_below="@+id/ivPhoto"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="4dp"
+        android:paddingTop="2dp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tvNumEnvies"
+        android:textColor="@color/darkblue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvCaption"
+        android:layout_below="@+id/ivPhoto"
+        android:layout_toRightOf="@+id/tvHeart"
+        android:padding="2dp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:textSize="15sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvEnvies"
+        android:text="envies"
+        android:textColor="@color/darkblue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvNumEnvies"
+        android:layout_below="@+id/ivPhoto"
+        android:maxLines="3"
+        android:padding="2dp"
+        android:ellipsize="end"
+        android:textSize="15sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvCaption"
+        android:text="caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvEnvies"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="4dp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:textColor="@color/black"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/tvLatestCommentUser"
+        android:text="user"
+        android:textColor="@color/darkblue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCaption"
+        android:layout_alignParentLeft="true"
+        android:maxLines="3"
+        android:paddingLeft="4dp"
+        android:ellipsize="end"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tvLatestCommentText"
+        android:text="latest comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCaption"
+        android:layout_toRightOf="@+id/tvLatestCommentUser"
+        android:paddingLeft="5dp"
         android:paddingRight="4dp"
         android:maxLines="3"
         android:ellipsize="end"

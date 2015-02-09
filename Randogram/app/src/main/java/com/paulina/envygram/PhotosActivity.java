@@ -51,6 +51,9 @@ public class PhotosActivity extends ActionBarActivity {
                 // Your code to refresh the list here.
                 // Make sure you call swipeContainer.setRefreshing(false) once the network request has completed successfully.
                 fetchPopularPhotos();
+                if (swipeContainer != null) {
+                    swipeContainer.setRefreshing(false);
+                }
             }
         });
         // Configure the refreshing colors
@@ -102,6 +105,8 @@ public class PhotosActivity extends ActionBarActivity {
 
 //                Log.i("DEBUG", response.toString());
 
+
+
                 // Iterate each of the photo items and decode the item into a Java object
                 JSONArray photosJSON = null;
                 try {
@@ -116,12 +121,25 @@ public class PhotosActivity extends ActionBarActivity {
                         // decode the attributes of the JSON into a data model
                         InstagramPhoto photo = new InstagramPhoto();
                         photo.username = photoJSON.getJSONObject("user").getString("username");
-                        photo.caption = photoJSON.getJSONObject("caption").getString("text");
+                        if (photoJSON.optJSONObject("caption") != null) {
+                            photo.caption = photoJSON.getJSONObject("caption").getString("text");
+                        }
                         photo.type = photoJSON.getString("type");
                         photo.imageUrl = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
                         photo.imageHeight = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");
                         photo.likesCount = photoJSON.getJSONObject("likes").getInt("count");
                         photo.profilePicUrl = photoJSON.getJSONObject("user").getString("profile_picture");
+
+                        InstagramComment comment = new InstagramComment();
+
+                        if (photoJSON.optJSONObject("comments") != null) {
+                            JSONArray commentsArray = photoJSON.getJSONObject("comments").getJSONArray("data");
+                            int latestCommentIndex = commentsArray.length() - 1;
+                            JSONObject latestComment = commentsArray.getJSONObject(latestCommentIndex);
+                            comment.text = latestComment.getString("text");
+                            comment.user = latestComment.getJSONObject("from").getString("username");
+                            photo.comment = comment;
+                        }
 
                         // add decoded object to the photos array
                         photos.add(photo);
@@ -134,9 +152,6 @@ public class PhotosActivity extends ActionBarActivity {
                 // after we've added all of our photos, it'll trigger the ListView and the adapter to refresh & all of the items will show up
                 aPhotos.notifyDataSetChanged();
 
-                // ...the data has come back, finish populating listview...
-                // Now we call setRefreshing(false) to signal refresh has finished
-                swipeContainer.setRefreshing(false);
             }
 
             @Override
@@ -144,6 +159,8 @@ public class PhotosActivity extends ActionBarActivity {
                 Log.getStackTraceString(throwable);
             }
         });
+
+        photos.clear();
     }
 
     @Override

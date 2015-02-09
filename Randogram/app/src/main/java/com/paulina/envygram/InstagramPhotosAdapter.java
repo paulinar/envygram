@@ -46,6 +46,10 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
         TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
         ImageView ivProfilePic = (ImageView) convertView.findViewById(R.id.ivProfilePic);
+        TextView tvNumEnvies = (TextView) convertView.findViewById(R.id.tvNumEnvies);
+        TextView tvHeart = (TextView) convertView.findViewById(R.id.tvHeart);
+        TextView tvLatestCommentText = (TextView) convertView.findViewById(R.id.tvLatestCommentText);
+        TextView tvLatestCommentUser = (TextView) convertView.findViewById(R.id.tvLatestCommentUser);
 
         // 4. Insert the Model data into each of the View items
         tvCaption.setText(photo.caption);
@@ -74,13 +78,10 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
                .into(ivProfilePic);
 
         tvUsername.setText(photo.username);
-
-//        Picasso.with(getContext())
-//                .load(photo.imageUrl)
-//                .fit()
-//                .centerCrop()
-//                .placeholder(R.drawable.ic_launcher)
-//                .into(ivPhoto);
+        tvNumEnvies.setText(String.valueOf(photo.likesCount));
+        tvHeart.setText( "" + (char) 0x2764 );
+        tvLatestCommentText.setText(photo.comment.text);
+        tvLatestCommentUser.setText(photo.comment.user);
 
         // 5. Return the created item as a View
         return convertView;

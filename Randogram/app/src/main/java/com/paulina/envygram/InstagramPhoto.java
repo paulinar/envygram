@@ -11,4 +11,5 @@ public class InstagramPhoto {
     public String profilePicUrl;
     public int imageHeight;
     public int likesCount;
+    public InstagramComment comment;
 }
