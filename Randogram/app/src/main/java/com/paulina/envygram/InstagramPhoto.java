@@ -13,3 +13,4 @@ public class InstagramPhoto {
     public int likesCount;
     public InstagramComment comment;
 }
+

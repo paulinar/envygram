@@ -32,6 +32,8 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        ViewHolder viewHolder;
+
         // 1. Get data item for this position
         InstagramPhoto photo = getItem(position);
 
@@ -39,24 +41,40 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         if (convertView == null) {
             // create a new view from the template
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, parent, false); // false = don't attach to parent i.e. container just yet
+
+            // set up the ViewHolder
+            viewHolder = new ViewHolder();
+            viewHolder.tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
+            viewHolder.ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
+            viewHolder.tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
+            viewHolder.ivProfilePic = (ImageView) convertView.findViewById(R.id.ivProfilePic);
+            viewHolder.tvNumEnvies = (TextView) convertView.findViewById(R.id.tvNumEnvies);
+            viewHolder.tvHeart = (TextView) convertView.findViewById(R.id.tvHeart);
+            viewHolder.tvLatestCommentText = (TextView) convertView.findViewById(R.id.tvLatestCommentText);
+            viewHolder.tvLatestCommentUser = (TextView) convertView.findViewById(R.id.tvLatestCommentUser);
+
+            // store the holder with the view
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        // 3. Look up views for populating the data (image, caption)
-        TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
-        ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
-        TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
-        ImageView ivProfilePic = (ImageView) convertView.findViewById(R.id.ivProfilePic);
-        TextView tvNumEnvies = (TextView) convertView.findViewById(R.id.tvNumEnvies);
-        TextView tvHeart = (TextView) convertView.findViewById(R.id.tvHeart);
-        TextView tvLatestCommentText = (TextView) convertView.findViewById(R.id.tvLatestCommentText);
-        TextView tvLatestCommentUser = (TextView) convertView.findViewById(R.id.tvLatestCommentUser);
+//        // 3. Look up views for populating the data (image, caption)
+//        TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
+//        ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
+//        TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
+//        ImageView ivProfilePic = (ImageView) convertView.findViewById(R.id.ivProfilePic);
+//        TextView tvNumEnvies = (TextView) convertView.findViewById(R.id.tvNumEnvies);
+//        TextView tvHeart = (TextView) convertView.findViewById(R.id.tvHeart);
+//        TextView tvLatestCommentText = (TextView) convertView.findViewById(R.id.tvLatestCommentText);
+//        TextView tvLatestCommentUser = (TextView) convertView.findViewById(R.id.tvLatestCommentUser);
 
         // 4. Insert the Model data into each of the View items
-        tvCaption.setText(photo.caption);
+        viewHolder.tvCaption.setText(photo.caption);
 
         // clear out the image view (because you could be using a recycled item)
-        ivPhoto.setImageResource(0);
-        ivProfilePic.setImageResource(0);
+        viewHolder.ivPhoto.setImageResource(0);
+        viewHolder.ivProfilePic.setImageResource(0);
 
         // rounded border transformation
         Transformation roundedBorder = new RoundedTransformationBuilder()
@@ -69,19 +87,20 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
                .load(photo.imageUrl)
                .placeholder(R.drawable.placeholderimage)
                .fit()
-               .into(ivPhoto);
+               .into(viewHolder.ivPhoto);
 
         Picasso.with(getContext())
                .load(photo.profilePicUrl)
+               .placeholder(R.drawable.placeholderprofile)
                .resize(100, 100)
                .transform(roundedBorder)
-               .into(ivProfilePic);
+               .into(viewHolder.ivProfilePic);
 
-        tvUsername.setText(photo.username);
-        tvNumEnvies.setText(String.valueOf(photo.likesCount));
-        tvHeart.setText( "" + (char) 0x2764 );
-        tvLatestCommentText.setText(photo.comment.text);
-        tvLatestCommentUser.setText(photo.comment.user);
+        viewHolder.tvUsername.setText(photo.username);
+        viewHolder.tvNumEnvies.setText(String.valueOf(photo.likesCount));
+        viewHolder.tvHeart.setText( "" + (char) 0x2764 );
+        viewHolder.tvLatestCommentText.setText(photo.comment.text);
+        viewHolder.tvLatestCommentUser.setText(photo.comment.user);
 
         // 5. Return the created item as a View
         return convertView;
