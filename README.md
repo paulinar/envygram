@@ -17,6 +17,8 @@ Completed user stories:
  * [x] *Optional*: Improve the user interface through styling and coloring
  * [x] *Optional*: Like count, user profile image
 
+ Also implemented ViewHolder pattern for fast lookups.
+
 **Walkthrough of all user stories:**
 
 ![Video Walkthrough](images/envygramwalkthrough.gif)
