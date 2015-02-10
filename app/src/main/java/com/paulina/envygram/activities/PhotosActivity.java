@@ -1,7 +1,10 @@
-package com.paulina.envygram;
+package com.paulina.envygram.activities;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -14,6 +17,10 @@ import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.paulina.envygram.models.InstagramComment;
+import com.paulina.envygram.models.InstagramPhoto;
+import com.paulina.envygram.adapters.InstagramPhotosAdapter;
+import com.paulina.envygram.R;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -27,7 +34,6 @@ public class PhotosActivity extends ActionBarActivity {
     public static final String CLIENT_ID = "fcf5dc6f63774c73bc45a4c3d1da61ac";
     private ArrayList<InstagramPhoto> photos;
     private InstagramPhotosAdapter aPhotos;
-
     private SwipeRefreshLayout swipeContainer;
 
     @Override
@@ -73,9 +79,16 @@ public class PhotosActivity extends ActionBarActivity {
         // 3. Set the adapter, binding it to the ListView
         lvPhotos.setAdapter(aPhotos);
 
-        // SEND OUT API REQUEST to POPULAR PHOTOS
-        fetchPopularPhotos();
-
+        // check Internet connection is active before sending out API request
+        if (isNetworkAvailable()) {
+            fetchPopularPhotos();
+        } else {
+            try {
+                throw new Exception("No Internet connectivity found.");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     // Trigger API request
@@ -104,8 +117,6 @@ public class PhotosActivity extends ActionBarActivity {
                 // Author Name: { “data” => [x] => “user” => “username” }
 
 //                Log.i("DEBUG", response.toString());
-
-
 
                 // Iterate each of the photo items and decode the item into a Java object
                 JSONArray photosJSON = null;
@@ -183,5 +194,12 @@ public class PhotosActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private Boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 }

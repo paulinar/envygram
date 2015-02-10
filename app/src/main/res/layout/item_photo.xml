@@ -67,7 +67,7 @@
 
     <TextView
         android:id="@+id/tvEnvies"
-        android:text="envies"
+        android:text="@string/envies"
         android:textColor="@color/darkblue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,7 +81,6 @@
 
     <TextView
         android:id="@+id/tvCaption"
-        android:text="caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvEnvies"
@@ -97,7 +96,6 @@
 
     <TextView
         android:id="@+id/tvLatestCommentUser"
-        android:text="user"
         android:textColor="@color/darkblue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -110,7 +108,6 @@
 
     <TextView
         android:id="@+id/tvLatestCommentText"
-        android:text="latest comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvCaption"

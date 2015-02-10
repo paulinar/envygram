@@ -1,4 +1,4 @@
-package com.paulina.envygram;
+package com.paulina.envygram.models;
 
 /**
  * Created by pramos on 2/7/15.

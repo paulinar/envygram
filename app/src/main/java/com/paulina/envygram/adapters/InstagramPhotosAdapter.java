@@ -1,4 +1,4 @@
-package com.paulina.envygram;
+package com.paulina.envygram.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.makeramen.RoundedTransformationBuilder;
+import com.paulina.envygram.R;
+import com.paulina.envygram.models.InstagramPhoto;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -104,5 +106,16 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
 
         // 5. Return the created item as a View
         return convertView;
+    }
+
+    public class ViewHolder {
+        TextView tvCaption;
+        ImageView ivPhoto;
+        TextView tvUsername;
+        ImageView ivProfilePic;
+        TextView tvNumEnvies;
+        TextView tvHeart;
+        TextView tvLatestCommentText;
+        TextView tvLatestCommentUser;
     }
 }

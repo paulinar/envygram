@@ -3,6 +3,7 @@
     package="com.paulina.envygram" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,7 @@
 
         <!-- Splash screen -->
         <activity
-            android:name="com.paulina.envygram.SplashScreen"
+            android:name=".activities.SplashScreenActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
@@ -24,7 +25,7 @@
 
         <!-- Main activity -->
         <activity
-            android:name="com.paulina.envygram.PhotosActivity"
+            android:name=".activities.PhotosActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
         </activity>
