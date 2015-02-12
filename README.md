@@ -26,3 +26,10 @@ Also implemented ViewHolder pattern for fast lookups.
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Splash screen stock photo credited to [Unsplash](http://unsplash.com/).
+
+**Libraries**
+
+This app leverages two third-party libraries:
+
+ * [Android AsyncHTTPClient](http://loopj.com/android-async-http/) - For asynchronous network requests
+ * [Picasso](http://square.github.io/picasso/) - For remote image loading
